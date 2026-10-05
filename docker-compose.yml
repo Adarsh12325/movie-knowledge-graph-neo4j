@@ -1,0 +1,25 @@
+# docker-compose.yml
+# Containerized Neo4j Graph Database Service
+# Architecture: Single-instance Neo4j 5.18.0 with automated seeding and health checks
+
+version: '3.8'
+
+services:
+  neo4j:
+    image: neo4j:5.18.0
+    container_name: movie_knowledge_graph_db
+    ports:
+      - "7474:7474" # HTTP port for Neo4j Browser and REST API
+      - "7687:7687" # Bolt binary protocol port for Python driver
+    volumes:
+      - ./data:/data
+      - ./logs:/logs
+      - ./init:/var/lib/neo4j/import # Directory for initialization scripts and import data
+    environment:
+      - NEO4J_AUTH=${NEO4J_AUTH}
+      - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
+    healthcheck:
+      test: ["CMD-SHELL", "wget -O /dev/null --header='Authorization: Basic bmVvNGo6bmVvNGo=' http://localhost:7474 || exit 1"]
+      interval: 5s
+      timeout: 10s
+      retries: 10

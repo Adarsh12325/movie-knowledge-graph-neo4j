@@ -1,0 +1,38 @@
+# Git Ignore Configuration for Movie Knowledge Graph Project
+
+# Environment secrets
+.env
+!.env.example
+
+# Docker persistence volumes
+data/
+logs/
+
+# Python cache and byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+
+# Pytest and coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Submission archives (generated locally)
+submission.zip
+*.tar.gz
